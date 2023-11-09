@@ -8,7 +8,17 @@ gcloud compute networks subnets create SUBNET_NAME --project=PROJECT_ID --range=
 ```
 allow ssh from IAP <https://cloud.google.com/iap/docs/using-tcp-forwarding>
 ```
-gcloud compute --project=PROJECT_ID firewall-rules create RULE_NAME_AALOW_SSH --direction=INGRESS --priority=1000 --network=NETWORK_NAME --action=ALLOW --rules=tcp:22 --source-ranges=35.235.240.0/20
+gcloud compute --project=PROJECT_ID firewall-rules create RULE_NAME_ALLOW_4IAP_SSH --direction=INGRESS --priority=1000 --network=NETWORK_NAME --action=ALLOW --rules=tcp:22 --source-ranges=35.235.240.0/20
+```
+allow ssh,rdp,icmp from all
+```
+gcloud compute --project=PROJECT_ID firewall-rules create RULE_NAME_ALLOW_4ALL_ICMP_SSH_RDP --direction=INGRESS --priority=1000 --network=NETWORK_NAME --action=ALLOW --rules=tcp:22,tcp:3389,icmp --source-ranges=0.0.0.0/0
+```
+
+## create the VM instance interal/external IPs
+
+```
+gcloud compute instances create managementnet-us-vm --project=PROJECT_ID --zone=us-east1-c --machine-type=e2-micro --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=managementsubnet-us --metadata=enable-oslogin=true --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=861727198879-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --create-disk=auto-delete=yes,boot=yes,device-name=managementnet-us-vm,image=projects/debian-cloud/global/images/debian-11-bullseye-v20231010,mode=rw,size=10,type=projects/qwiklabs-gcp-03-696399c996aa/zones/us-east1-c/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 ```
 
 ## create the VM instance with no public IP address
