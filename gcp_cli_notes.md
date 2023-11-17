@@ -15,11 +15,10 @@ gcloud config list project
 ```
 ```
 gcloud config set compute/region us-central1
-gcloud config set compute/zone "us-west1-c"
-export ZONE=$(gcloud config get compute/zone)
-
-gcloud config set compute/region "us-west1"
+gcloud config set compute/zone us-central1-c
 export REGION=$(gcloud config get compute/region)
+export ZONE=$(gcloud config get compute/zone)
+echo $REGION $ZONE
 ```
 ```
 gsutil mb gs://qwiklabs-gcp-01-3a8c7b56f417
