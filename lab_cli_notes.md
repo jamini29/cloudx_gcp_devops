@@ -56,5 +56,17 @@ gcloud compute networks subnets update SUBNET_NAME --[no-]enable-private-ip-goog
 
 ---
 
+
+#### Configuring VPC Firewalls
+<https://partner.cloudskillsboost.google/course_sessions/6628549/labs/427372>
+
+
+#### IDS
+<https://partner.cloudskillsboost.google/course_sessions/6628549/labs/427386>
+
+
+
+
+
 <https://brainly.in/question/14949411>
 
