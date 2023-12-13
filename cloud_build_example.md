@@ -92,21 +92,10 @@ cat cloudbuild.yaml
 > ```
 
 ```
+# check that build return non zero - some error
 gcloud builds submit --config cloudbuild.yaml
 echo $?
 ```
 > ```
 > 1
 > ```
-
----
-
-# Deploying GKE Autopilot Clusters from Cloud Shell
-
-```
-export my_region=us-central1
-export my_cluster=autopilot-cluster-1
-
-gcloud container clusters create-auto $my_cluster --region $my_region
-gcloud container clusters get-credentials $my_cluster --region $my_region
-
