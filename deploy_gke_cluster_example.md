@@ -305,18 +305,48 @@ kubectl exec -it new-nginx -- /bin/bash
 > apt-get update
 > apt-get install vim
 > vim /usr/share/nginx/html/test.html
+> ```
 > > ```
 > > <html> <header><title>This is title</title></header>
 > > <body> Hello world from new-nginx</body>
 > > </html>
 > > ```
+> ```
 > exit
 > ```
 
-# create set up port forwarding from port 10081 of the Cloud Shell VM to port 80 of the nginx container
-kubectl port-forward new-nginx 10081:80
+#### set up port forwarding from port 10081 of the Cloud Shell VM to port 80 of the nginx container
 ```
+kubectl port-forward new-nginx 10081:80 &
+```
+> ```
+> Forwarding from 127.0.0.1:10081 -> 80
+> Handling connection for 10081
+> ```
+#### test availability
+```
+curl http://127.0.0.1:10081/test.html
+```
+> ```
+> <html> <header><title>This is title</title></header>
+> <body> Hello worl from new-nginx </body>
+> </html>
+> ```
 
+#### check pod logs
+!!! open new cloud shell terminal
+```
+kubectl logs new-nginx -f --timestamps
+```
+> ```
+> ..
+> 2023-12-13T11:12:16.697141140Z 2023/12/13 11:12:16 [notice] 1#1: start worker process 31
+> 2023-12-13T11:16:21.433500554Z 127.0.0.1 - - [13/Dec/2023:11:16:21 +0000] "GET /test.html HTTP/1.1" 200 103 "-" "curl/7.74.0" "-"
+> ..
+> .. here we call test.html as before
+> ..
+> 2023-12-13T11:22:24.801809381Z 127.0.0.1 - - [13/Dec/2023:11:22:24 +0000] "GET /test.html HTTP/1.1" 200 103 "-" "curl/7.74.0" "-"
+> ```
 
 
 
