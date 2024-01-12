@@ -99,6 +99,11 @@ CronJob is a Kubernetes object that creates Jobs in a repeatable manner to a def
 
 
 
+## misc
+Run a temporary Pod called "toolbox" with the label app=toolbox and get a shell in the Pod:
+```
+kubectl run toolbox --labels app=toolbox --image=alpine --restart=Never --rm --stdin --tty
+```
 
 
 
