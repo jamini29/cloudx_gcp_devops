@@ -13,6 +13,11 @@ gcloud config set accessibility/screen_reader false
 gcloud auth list
 gcloud config list project
 ```
+
+```
+source <(kubectl completion bash)
+```
+
 ```
 gcloud config set compute/region us-central1
 gcloud config set compute/zone us-central1-c
